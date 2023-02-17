@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CDN React -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <!-- CDN Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <title>Props & State</title>
+</head>
+
+<body>
+
+    <div class="row">
+        <div class="col-6 p-5">
+            <div id="app"></div>
+        </div>
+    </div>
+
+    <script type="text/babel">
+        /*
+        class ButtonPrimary extends React.Component {
+            render() {
+                const btn = React.createElement('button', { class: 'btn btn-primary' }, 'Submit')
+                return btn
+            }
+        }
+        */
+
+        /*
+        class Cards extends React.Component {
+            render() {
+                const link = React.createElement('a', { href: '#', class: 'btn btn-primary' }, 'Go Some Where')
+                const cardText = React.createElement('p', { class: 'card-text' }, 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, corporis?')
+                const cardTitle = React.createElement('h5', { class: 'card-title' }, 'Ini adalah Card')
+                const cardBody = React.createElement('div', { class: 'card-body' }, cardTitle, cardText, link)
+                const card = React.createElement('div', { class: 'card' }, cardBody)
+
+                return card
+            }
+        }
+        */
+
+        // 1. Class Component
+        class Buttonjsx extends React.Component {
+            render() {
+                return <button className="btn btn-primary">{this.props.text}</button>
+            }
+        }
+
+        class Cardsjsx extends React.Component {
+            constructor() {
+                super();
+                this.state = {
+                    Judul: "Aku adalah State",
+                    Title: "Aku adalah sub title card"
+                }
+            }
+
+            ubahjudul = () => {
+                this.setState({
+                    Judul: "Aku berubah"
+                })
+            }
+
+            render() {
+                const card = (
+                    <div className="card">
+                        <div className="card-body">
+                            <h5 className="card-title">{this.state.Judul}</h5>
+                            <p className="card-text">{this.state.Title}</p>
+                            <Buttonjsx text="Aku adalah Props" />
+                            <button onClick={this.ubahjudul}>Ubah Button</button>
+                        </div>
+                    </div>
+                )
+
+                return card
+            }
+        }
+
+        // 2. Function Component
+        /*
+        function WarningButton() {
+            return <button className="btn btn-warning">Warning Button</button>
+        }
+        */
+
+        // menggunakan arrow function
+        const SuccessButton = () => {
+            return <button className="btn btn-success">Success Button</button>
+        }
+
+        const CardFunction = () => {
+            // state hoook
+            const [state, setState] = React.useState('Judul Card Menggunakan React HOOK');
+
+            return (
+                <div className="card" style={{ width: "15rem" }}>
+                    <div className="card-body">
+                        <h5 className="card-title">{state}</h5>
+                        <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, corporis?</p>
+                        <SuccessButton />
+                    </div>
+                </div>
+            )
+        }
+
+        ReactDOM.render(<CardFunction />, document.getElementById('app'))
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
